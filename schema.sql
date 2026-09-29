@@ -1,0 +1,22 @@
+CREATE TABLE IF NOT EXISTS riders (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL UNIQUE COLLATE NOCASE,
+  default_price INTEGER NOT NULL, -- centavos
+  active INTEGER NOT NULL DEFAULT 1,
+  created_on TEXT NOT NULL -- YYYY-MM-DD (BRT)
+);
+
+CREATE TABLE IF NOT EXISTS rides (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  rider_id INTEGER NOT NULL REFERENCES riders(id),
+  date TEXT NOT NULL, -- YYYY-MM-DD (BRT)
+  went INTEGER NOT NULL, -- 1 = deu carona, 0 = não
+  price INTEGER NOT NULL DEFAULT 0, -- centavos
+  note TEXT,
+  UNIQUE (rider_id, date)
+);
+
+CREATE TABLE IF NOT EXISTS state (
+  key TEXT PRIMARY KEY,
+  value TEXT NOT NULL
+);

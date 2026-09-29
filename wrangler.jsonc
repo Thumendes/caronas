@@ -1,0 +1,24 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "caronas-bot",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true,
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "caronas",
+      "database_id": "0218450a-047f-4642-802b-2f5169d671e3",
+    },
+  ],
+  "triggers": {
+    // 02:00 UTC ter–sáb = 23:00 BRT seg–sex | dia 1 às 12:00 UTC = 09:00 BRT
+    "crons": ["0 2 * * 2-6", "0 12 1 * *"],
+  },
+  "vars": {
+    "AI_MODEL": "anthropic/claude-haiku-4.5",
+  },
+}
